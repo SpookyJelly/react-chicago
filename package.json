@@ -5,10 +5,7 @@
   "scripts": {
     "rollup": "rollup -c"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SpookyJelly/react-chicago.git"
-  },
+  "repository": "https://github.com/SpookyJelly/react-chicago.git",
   "homepage": "https://github.com/SpookyJelly/react-chicago/",
   "author": "spookyjelly",
   "license": "ISC",
@@ -37,5 +34,13 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "keywords": ["react","typo animation","animation","text animation","typing","typing effect","typing animation"]
+  "keywords": [
+    "react",
+    "typo animation",
+    "animation",
+    "text animation",
+    "typing",
+    "typing effect",
+    "typing animation"
+  ]
 }
