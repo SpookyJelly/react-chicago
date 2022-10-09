@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <div>
         <p>React-Chicago ShowCase</p>
-        <Chicago text="Hello, World!" color="white" cursorColor="white" />
+        <Chicago text="Hello, World!" />
       </div>
     </div>
   );
