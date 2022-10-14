@@ -21,7 +21,7 @@
 
 
 
-**View Showcase in Here**
+**View [Showcase](https://spookyjelly.github.io/react-chicago/) in Here**
 
 
 
