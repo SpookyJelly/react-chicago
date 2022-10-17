@@ -14,30 +14,34 @@ export interface ChicagoProps {
 
 const Wrapper = styled.div`
   white-space: break-spaces;
+  position: relative;
 `;
 
 const Contents = styled.p<Omit<ChicagoProps, "text">>`
   color: ${(props) => props.color ?? "black"};
   &::after {
-    content: "";
+    color: transparent;
     margin-left: 3px;
     animation: typer infinite 0.9s linear;
-    background-color: ${(props) => props.cursorColor ?? "black"};
-    border-right: solid 2px ${(props) => props.cursorColor ?? "black"};
 
-    ${({ cursorStyle }) => {
+    ${({ cursorStyle, cursorColor }) => {
       switch (cursorStyle) {
         case "typo":
           return css`
-            width: 5px;
-            height: 2px;
+            content: "''";
+            position: absolute;
+            top: -0.3rem;
+            border-bottom: solid 1px ${cursorColor};
+            width: 0.5rem;
           `;
 
         default:
         case "default":
           return css`
+            content: "";
             width: 2px;
             height: 100%;
+            border-right: solid 2px ${cursorColor};
           `;
       }
     }}
@@ -59,6 +63,7 @@ const Chicago = ({
   text,
   color = "black",
   cursorColor = "black",
+  interval = 100,
   className,
   style,
   cursorStyle = "default",
@@ -69,14 +74,30 @@ const Chicago = ({
     if (ref.current) {
       ref.current.innerText = "";
       for (const elem of text) {
-        await new Promise((res) => setTimeout(res, 100));
+        await new Promise((res) => setTimeout(res, interval));
+        // const handler = setTimeout((res) => res, interval);
         ref.current.innerText += elem;
+        // return () => clearTimeout(handler);
       }
     }
   };
+
   useEffect(() => {
     setText(text);
+    if (ref.current) {
+      ref.current.innerText = "";
+      const handler = text.split("").forEach((elem) => {
+        console.log(elem);
+      });
+    }
   }, [text]);
+
+  // useEffect(() => {
+  //   setText(text);
+  // }, [text]);
+
+  // useEffect(() => {
+  // }, [tState]);
 
   return (
     <Wrapper className={className}>
