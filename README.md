@@ -4,7 +4,7 @@
 
 **React Chicago is Simple Typo Animation Component in Style of React**
 
-이 문서는 한국어[](https://github.com/SpookyJelly/react-chicago/blob/main/readme/readme-ko.md)로도 읽을 수 있습니다.
+이 문서는 [한국어](https://github.com/SpookyJelly/react-chicago/blob/main/readme/readme-ko.md)로도 읽을 수 있습니다.
 
 ### The origin of a name
 
