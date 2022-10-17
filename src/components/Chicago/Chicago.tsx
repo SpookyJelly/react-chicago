@@ -70,34 +70,16 @@ const Chicago = ({
 }: ChicagoProps) => {
   const ref = useRef<HTMLParagraphElement>(null);
 
-  const setText = async (text: string) => {
-    if (ref.current) {
-      ref.current.innerText = "";
+  useEffect(() => {
+    ref.current!.innerText = "";
+    const handler = setTimeout(async () => {
       for (const elem of text) {
         await new Promise((res) => setTimeout(res, interval));
-        // const handler = setTimeout((res) => res, interval);
-        ref.current.innerText += elem;
-        // return () => clearTimeout(handler);
+        ref.current!.innerText += elem;
       }
-    }
-  };
-
-  useEffect(() => {
-    setText(text);
-    if (ref.current) {
-      ref.current.innerText = "";
-      const handler = text.split("").forEach((elem) => {
-        console.log(elem);
-      });
-    }
+    }, 600);
+    return () => clearTimeout(handler);
   }, [text]);
-
-  // useEffect(() => {
-  //   setText(text);
-  // }, [text]);
-
-  // useEffect(() => {
-  // }, [tState]);
 
   return (
     <Wrapper className={className}>
