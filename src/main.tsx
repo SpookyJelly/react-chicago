@@ -7,6 +7,8 @@ import English from "./pages/English";
 import Korean from "./pages/Korean";
 import "antd/dist/antd.css";
 
+console.log(import.meta.env.BASE_NAME);
+
 const router = createBrowserRouter(
   [
     {
@@ -18,7 +20,7 @@ const router = createBrowserRouter(
       ],
     },
   ],
-  { basename: import.meta.env.BASE_NAME }
+  { basename: import.meta.env.VITE_BASE_NAME }
 );
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
