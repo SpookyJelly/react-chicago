@@ -1,0 +1,7 @@
+#english-page{
+  font-family: 'Rubik', sans-serif;
+}
+
+#english-page .ant-form-item-control{
+  text-align: start;
+}

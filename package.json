@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "antd": "^4.23.6",
     "react": "^18.2.0",
-    "react-chicago": "^0.0.4",
-    "react-dom": "^18.2.0"
+    "react-chicago": "^0.1.0-a",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

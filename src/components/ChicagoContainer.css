@@ -1,0 +1,8 @@
+.chicago-container {
+  margin-bottom: 2rem;
+}
+
+
+.chicago-container .ant-card-head-title{
+  text-align: start;
+}

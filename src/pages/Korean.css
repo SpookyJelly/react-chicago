@@ -1,0 +1,7 @@
+#korean-page{
+  font-family: 'Noto Serif KR', sans-serif;
+}
+
+#korean-page .ant-form-item-control{
+  text-align: start;
+}
