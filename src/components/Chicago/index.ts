@@ -1,1 +1,1 @@
-export { default } from "./Chicago";
+export { default, ChicagoProps } from "./Chicago";
