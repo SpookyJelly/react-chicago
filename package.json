@@ -1,6 +1,6 @@
 {
   "name": "react-chicago",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "typewritter for react",
   "scripts": {
     "rollup": "rollup -c",
