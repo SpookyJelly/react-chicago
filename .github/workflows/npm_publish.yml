@@ -24,6 +24,7 @@ jobs:
         run: |
           COMMIT_HASH=$(git rev-parse HEAD)
           echo 'commit_sha=$COMMIT_HASH' >> $GITHUB_OUTPUT
+          echo 'this commit hash is $COMMIT_HASH'
         # run: echo 'commit_sha=testing' >> $GITHUB_OUTPUT
     outputs:
       ref: ${{ steps.lastest_head.outputs.commit_sha }}
