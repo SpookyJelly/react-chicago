@@ -22,9 +22,8 @@ jobs:
       - name: set output
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
         id: lastest_head
-        # run: echo 'commit_sha=test' >> $GITHUB_OUTPUT
-        # run: echo 'commit_sha=test' >> $GITHUB_OUTPUT
-        run: echo 'commit_sha=$(git rev-parse HEAD)' >> $GITHUB_OUTPUT
+        # run: echo 'commit_sha=$(git rev-parse HEAD)' >> $GITHUB_OUTPUT
+        run: echo 'commit_sha=testing' >> $GITHUB_OUTPUT
     outputs:
       ref: ${{ steps.lastest_head.outputs.commit_sha }}
   npm_publish:
