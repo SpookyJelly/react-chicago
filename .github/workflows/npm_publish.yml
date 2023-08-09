@@ -23,7 +23,7 @@ jobs:
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
         run: echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
       - name: for Test
-        run: echo "${{needs.bump_version.outputs.commit_sha}}"
+        run: echo "${{needs.bump_version.outputs}}"
 
   npm_publish:
     needs: [bump_version]
@@ -31,11 +31,12 @@ jobs:
     steps:
       - name: Prepare
         run: |
-          echo "this is for Test ${{needs.bump_version.outputs.commit_sha}}"
+          echo "this is for Test ${{needs.bump_version.outputs}}"
       - name: Checkout
-        uses: actions/checkout@v3
+        # uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
-          ref: ${{needs.bump_version.outputs.commit_sha}}
+          ref: ${{needs.bump_version.outputs}}
       - name: Install dependencies
         run: npm install
       - name: Build and Publish
