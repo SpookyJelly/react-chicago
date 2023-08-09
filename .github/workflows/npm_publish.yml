@@ -22,6 +22,7 @@ jobs:
       - name: set output
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
         id: lastest_head
+        # 그냥 test 같은 상수 박고 넘어오는 건 되는데...
         # run: echo "commit_sha=test >> $GITHUB_OUTPUT"
         run: |
           echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
@@ -33,12 +34,16 @@ jobs:
 
     steps:
       - name: Prepare
+        # run: |
+        #   echo "this is for Test ${{needs.bump_version.outputs.ref}}"
         run: |
-          echo "this is for Test ${{needs.bump_version.outputs.ref}}"
+          COMMIT_HASH=$(git log -1 --format=%H)
+          echo "::set-output name=commit_hash::$COMMIT_HASH"
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{needs.bump_version.outputs.ref}}
+          ref: $commit_hash
+          # ref: ${{needs.bump_version.outputs.ref}}
       - name: Install dependencies
         run: npm install
       - name: Build and Publish
