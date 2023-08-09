@@ -21,7 +21,9 @@ jobs:
       #     target-branch: "main"
       - name: set output
         id: lastest_head
-        run: echo 'commit_sha=$(git rev-parse HEAD)' >> $GITHUB_OUTPUT
+        run: |
+          COMMIT_HASH=$(git rev-parse HEAD)
+          echo 'commit_sha=$COMMIT_HASH' >> $GITHUB_OUTPUT
         # run: echo 'commit_sha=testing' >> $GITHUB_OUTPUT
     outputs:
       ref: ${{ steps.lastest_head.outputs.commit_sha }}
@@ -33,7 +35,6 @@ jobs:
       - name: Prepare
         run: |
           echo "this is for Test ${{needs.bump_version.outputs.ref}}"
-          echo "how ?${{steps.bump_version.outputs.ref}}}}"
       - name: Checkout
         uses: actions/checkout@v3
         # uses: actions/checkout@v2
