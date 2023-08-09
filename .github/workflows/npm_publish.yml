@@ -10,22 +10,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      # - name: gh-action-bump-version
-      #   uses: "phips28/gh-action-bump-version@master"
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     minor-wording: "MINOR"
-      #     major-wording: "MAJOR"
-      #     patch-wording: "PATCH"
-      #     target-branch: "main"
+      - name: gh-action-bump-version
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          minor-wording: "MINOR"
+          major-wording: "MAJOR"
+          patch-wording: "PATCH"
+          target-branch: "main"
       - name: set output
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
         id: lastest_head
         # run: echo "commit_sha=test >> $GITHUB_OUTPUT"
         run: |
-          echo "COMMIT_SHA=$(git rev-parse HEAD)"
-          echo "commit_sha=$COMMIT_SHA >> $GITHUB_OUTPUT"
+          echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
     outputs:
       ref: ${{ steps.lastest_head.outputs.commit_sha }}
   npm_publish:
