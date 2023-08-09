@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "typewritter for react",
   "scripts": {
-    "rollup": "rollup -c",
+    "build": "rollup -c",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
