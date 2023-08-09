@@ -21,7 +21,7 @@ jobs:
           target-branch: "main"
       - name: set output
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
-        id: bump_version
+        id: commit_sha
         run: echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
 
   npm_publish:
@@ -30,12 +30,12 @@ jobs:
     steps:
       - name: Prepare
         run: |
-          echo "this is for Test ${{needs.bump_version.outputs.bump_version}}"
+          echo "this is for Test ${{needs.bump_version.outputs.commit_sha}}"
       - name: Checkout
-        # uses: actions/checkout@v3
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        # uses: actions/checkout@v2
         with:
-          ref: ${{needs.bump_version.outputs.bump_version}}
+          ref: ${{needs.bump_version.outputs.commit_sha}}
       - name: Install dependencies
         run: npm install
       - name: Build and Publish
