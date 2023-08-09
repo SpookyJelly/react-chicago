@@ -10,33 +10,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: gh-action-bump-version
-        uses: "phips28/gh-action-bump-version@master"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          minor-wording: "MINOR"
-          major-wording: "MAJOR"
-          patch-wording: "PATCH"
-          target-branch: "main"
+      # - name: gh-action-bump-version
+      #   uses: "phips28/gh-action-bump-version@master"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     minor-wording: "MINOR"
+      #     major-wording: "MAJOR"
+      #     patch-wording: "PATCH"
+      #     target-branch: "main"
       - name: set output
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
         id: commit_sha
-        run: echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
+        run: echo "commit_sha=test >> $GITHUB_OUTPUT"
+        # run: echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
     outputs:
       commit_sha: ${{ steps.commit_sha.outputs.commit_sha }}
   npm_publish:
     needs: [bump_version]
     runs-on: ubuntu-latest
+    env:
+      COMMIT_SHA: ${{needs.bump_version.outputs.commit_sha}}
+
     steps:
       - name: Prepare
         run: |
           echo "this is for Test ${{needs.bump_version.outputs.commit_sha}}"
+          echo "$COMMIT_SHA"
       - name: Checkout
         uses: actions/checkout@v3
         # uses: actions/checkout@v2
         with:
-          ref: ${{needs.bump_version.outputs.commit_sha}}
+          # ref: ${{needs.bump_version.outputs.commit_sha}}
+          ref: $COMMIT_SHA
       - name: Install dependencies
         run: npm install
       - name: Build and Publish
