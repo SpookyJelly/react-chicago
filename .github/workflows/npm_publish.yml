@@ -20,12 +20,12 @@ jobs:
       #     patch-wording: "PATCH"
       #     target-branch: "main"
       - name: set output
+        # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
         id: lastest_head
+        # run: echo "commit_sha=test >> $GITHUB_OUTPUT"
         run: |
-          COMMIT_HASH=$(git rev-parse HEAD)
-          echo 'commit_sha=$COMMIT_HASH' >> $GITHUB_OUTPUT
-          echo 'this commit hash is $COMMIT_HASH'
-        # run: echo 'commit_sha=testing' >> $GITHUB_OUTPUT
+          echo "COMMIT_SHA=$(git rev-parse HEAD)"
+          echo "commit_sha=$COMMIT_SHA >> $GITHUB_OUTPUT"
     outputs:
       ref: ${{ steps.lastest_head.outputs.commit_sha }}
   npm_publish:
@@ -38,7 +38,6 @@ jobs:
           echo "this is for Test ${{needs.bump_version.outputs.ref}}"
       - name: Checkout
         uses: actions/checkout@v3
-        # uses: actions/checkout@v2
         with:
           ref: ${{needs.bump_version.outputs.ref}}
       - name: Install dependencies
