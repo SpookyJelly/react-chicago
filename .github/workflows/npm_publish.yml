@@ -21,28 +21,25 @@ jobs:
       #     target-branch: "main"
       - name: set output
         # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
-        id: commit_sha
-        run: echo "commit_sha=test >> $GITHUB_OUTPUT"
-        # run: echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
+        id: lastest_head
+        # run: echo 'commit_sha=test' >> $GITHUB_OUTPUT
+        # run: echo 'commit_sha=test' >> $GITHUB_OUTPUT
+        run: echo 'commit_sha=$(git rev-parse HEAD)' >> $GITHUB_OUTPUT
     outputs:
-      commit_sha: ${{ steps.commit_sha.outputs.commit_sha }}
+      ref: ${{ steps.lastest_head.outputs.commit_sha }}
   npm_publish:
     needs: [bump_version]
     runs-on: ubuntu-latest
-    env:
-      COMMIT_SHA: ${{needs.bump_version.outputs.commit_sha}}
 
     steps:
       - name: Prepare
         run: |
-          echo "this is for Test ${{needs.bump_version.outputs.commit_sha}}"
-          echo "$COMMIT_SHA"
+          echo "this is for Test ${{needs.bump_version.outputs.ref}}"
       - name: Checkout
         uses: actions/checkout@v3
         # uses: actions/checkout@v2
         with:
-          # ref: ${{needs.bump_version.outputs.commit_sha}}
-          ref: $COMMIT_SHA
+          ref: ${{needs.bump_version.outputs.ref}}
       - name: Install dependencies
         run: npm install
       - name: Build and Publish
