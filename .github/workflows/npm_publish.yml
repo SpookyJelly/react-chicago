@@ -19,15 +19,13 @@ jobs:
           major-wording: "MAJOR"
           patch-wording: "PATCH"
           target-branch: "main"
-      - name: set output
-        # run: echo "::set-output name=commit_sha::$(git rev-parse HEAD)"
-        id: lastest_head
-        # 그냥 test 같은 상수 박고 넘어오는 건 되는데...
-        # run: echo "commit_sha=test >> $GITHUB_OUTPUT"
-        run: |
-          echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
-    outputs:
-      ref: ${{ steps.lastest_head.outputs.commit_sha }}
+          # 상수로 commit_sha 넣어도, 다음 스텝에서 이상하게 저장이 안된다
+      # - name: set output
+      #   id: lastest_head
+      #   run: |
+      #     echo "commit_sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT"
+    # outputs:
+    # ref: ${{ steps.lastest_head.outputs.commit_sha }}
   npm_publish:
     needs: [bump_version]
     runs-on: ubuntu-latest
@@ -36,9 +34,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          # ref: $commit_hash
+          # 그래서, github.ref를 사용해서, branch에 대한 완전한 참조를 얻은 뒤 사용.
           ref: ${{github.ref}}
-          # ref: ${{needs.bump_version.outputs.ref}}
       - name: Install dependencies
         run: npm install
       - name: Build and Publish
