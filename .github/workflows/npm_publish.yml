@@ -33,16 +33,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Prepare
-        # run: |
-        #   echo "this is for Test ${{needs.bump_version.outputs.ref}}"
-        run: |
-          COMMIT_HASH=$(git log -1 --format=%H)
-          echo "::set-output name=commit_hash::$COMMIT_HASH"
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: $commit_hash
+          # ref: $commit_hash
+          ref: ${{github.ref}}
           # ref: ${{needs.bump_version.outputs.ref}}
       - name: Install dependencies
         run: npm install
